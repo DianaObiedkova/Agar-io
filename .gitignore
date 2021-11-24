@@ -1,0 +1,22 @@
+# Ignore everything
+/**
+
+# Except directories
+!*/
+
+# And source code files
+!*.cs
+!*.js
+!*.css
+!*.cshtml
+
+# And these files
+!.gitignore
+!README.md
+!LICENSE
+
+Agar.io/Agar.io/obj/**
+Agar.io/Agar.io/bin/**
+.vs/**
+.vscode/**
+node_modules/**
