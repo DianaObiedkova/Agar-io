@@ -9,7 +9,7 @@ namespace Agar.io.Models
     {
         public double X { get; set; }
         public double Y { get; set; }
-        public Position(int X, int Y)
+        public Position(double X, double Y)
         {
             this.X = X;
             this.Y = Y;

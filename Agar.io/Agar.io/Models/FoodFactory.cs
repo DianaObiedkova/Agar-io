@@ -22,11 +22,7 @@ namespace Agar.io.Models
 
             return new Food(count.ToString(), "Food " + count.ToString())
             {
-                Location = new Position
-                {
-                    X = ran.Next(maxWidth),
-                    Y = ran.Next(maxHeight)
-                },
+                Location = new Position(ran.Next(maxWidth), ran.Next(maxHeight)),
                 Weight = ran.Next(1, 5)
             };
         }
