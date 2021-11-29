@@ -9,7 +9,17 @@ namespace Agar.io.Models
     {
         public double X { get; set; }
         public double Y { get; set; }
-
+        public Position(int X, int Y)
+        {
+            this.X = X;
+            this.Y = Y;
+        }
+        public Position()
+        {
+            Random ran = new Random();
+            X = ran.Next(int.MaxValue); //we could limit it for our future needs
+            Y = ran.Next(int.MaxValue);
+        }
         public override int GetHashCode()
         {
             unchecked // Overflow is fine, just wrap

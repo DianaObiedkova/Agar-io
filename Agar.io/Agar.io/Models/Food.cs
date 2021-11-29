@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 
 namespace Agar.io.Models
 {
-    public class Size
+    public class Food:EdibleEntity
     {
-        public int Width { get; set; }
-        public int Height { get; set; }
+        public Food(string id, string name) : base(id, name)
+        {
+            
+        }
     }
 }

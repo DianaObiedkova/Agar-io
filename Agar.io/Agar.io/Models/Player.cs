@@ -5,13 +5,12 @@ using System.Threading.Tasks;
 
 namespace Agar.io.Models
 {
-    public class Player:Entity
+    public class Player : EdibleEntity
     {
         public double Speed { get; }
         public int Score { get; set; }
-        public Position Location { get; set; }
-        public int Weight { get; set; }
-        public Player(string id,string name) : base(id, name)
+        
+        public Player(string id, string name) : base(id, name)
         {
             Score = 0;
             Weight = 1;
