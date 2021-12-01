@@ -7,6 +7,13 @@ namespace Agar.io.Models
 {
     public class Game
     {
+        /// <summary>
+        /// We've used singleton pattern here 
+        /// Sixth version of article (https://csharpindepth.com/articles/singleton)
+        /// </summary>
+        private static readonly Lazy<Game> lazy = new Lazy<Game>(() => new Game());
+        public static Game Instance { get { return lazy.Value; } }
+
         private readonly FoodFactory foodFactory;
         readonly int MaxFoodCount = 10000;
         readonly Random ran = new Random();
