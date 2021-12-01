@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\4 курс\\GameDev\\agario our\\Agar.io\\Agar.io\\Agar.io.csproj",
-      "projectName": "Agar.io",
-      "projectPath": "F:\\4 курс\\GameDev\\agario our\\Agar.io\\Agar.io\\Agar.io.csproj",
+      "projectUniqueName": "F:\\4 курс\\GameDev\\agario our\\Agar.io\\Agar.io\\Agar.IO.Server.csproj",
+      "projectName": "Agar.IO.Server",
+      "projectPath": "F:\\4 курс\\GameDev\\agario our\\Agar.io\\Agar.io\\Agar.IO.Server.csproj",
       "packagesPath": "C:\\Users\\Diana\\.nuget\\packages\\",
       "outputPath": "F:\\4 курс\\GameDev\\agario our\\Agar.io\\Agar.io\\obj\\",
       "projectStyle": "PackageReference",

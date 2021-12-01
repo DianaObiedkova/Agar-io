@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30309.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agar.io", "Agar.io\Agar.io.csproj", "{F72B3577-E449-4463-B7FC-35715380234A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agar.IO.Server", "Agar.io\Agar.IO.Server.csproj", "{F72B3577-E449-4463-B7FC-35715380234A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agar.IO.Client", "Agar.IO.Client\Agar.IO.Client.csproj", "{5C1FDF52-A224-4C20-B870-C05C8B4FCC5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocket.Test", "WebSocket.Test\WebSocket.Test.csproj", "{004897B8-5F6B-4CB3-BBDC-A5AB8D1E318D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{5C1FDF52-A224-4C20-B870-C05C8B4FCC5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C1FDF52-A224-4C20-B870-C05C8B4FCC5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C1FDF52-A224-4C20-B870-C05C8B4FCC5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{004897B8-5F6B-4CB3-BBDC-A5AB8D1E318D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{004897B8-5F6B-4CB3-BBDC-A5AB8D1E318D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{004897B8-5F6B-4CB3-BBDC-A5AB8D1E318D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{004897B8-5F6B-4CB3-BBDC-A5AB8D1E318D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
