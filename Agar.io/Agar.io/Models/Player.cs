@@ -39,5 +39,21 @@ namespace Agar.io.Models
             Location = newLocation;
             return true;
         }
+
+        public void Eat(EdibleEntity entity)
+        {
+            if (Weight > entity.Weight)
+            {
+                Weight += entity.Weight;
+                entity.Weight = 0;
+            }
+        }
+
+        public bool IsIntersecting(EdibleEntity entity)
+        {
+            double distance = Location.Dinstance(entity.Location);
+
+            return distance <= Radius + entity.Radius;
+        }
     }
 }

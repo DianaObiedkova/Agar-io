@@ -20,6 +20,11 @@ namespace Agar.io.Models
             X = ran.Next(int.MaxValue); //we could limit it for our future needs
             Y = ran.Next(int.MaxValue);
         }
+
+        public double Dinstance(Position position)
+        {
+            return Math.Sqrt(Math.Pow(X - position.X,2)  + Math.Pow(Y - position.Y,2));
+        }
         public override int GetHashCode()
         {
             unchecked // Overflow is fine, just wrap
