@@ -107,7 +107,7 @@ namespace Agar.io.Models
                 Location = GetFreePosition()
             };
             players.Add(communicator,newBot);
-            lastUpdate.Add(communicator, DateTime.Now);
+            lastUpdate.Add(communicator, DateTime.UtcNow);
             communicator.Send(new Message(IO.Server.Models.Communication.Enums.EventType.SpawnMyself, newBot));
             TransferToAll(new Message(IO.Server.Models.Communication.Enums.EventType.Spawn, newBot), newBot);
 
@@ -142,10 +142,23 @@ namespace Agar.io.Models
                     TransferToAll(new Message(IO.Server.Models.Communication.Enums.EventType.SizeChange, extended));
 
                 }
-
             }
 
             return dead;
+        }
+
+        public void Move(ICommunicator com, Position pos)
+        {
+            players.TryGetValue(com, out Player player);
+            lastUpdate.TryGetValue(com, out DateTime time);
+            if (!lastUpdate.ContainsKey(com)) return;
+
+            lastUpdate.Add(com, DateTime.UtcNow);
+
+            player.Location = pos;
+            if (CheckIntersection(player)) return;
+
+            TransferToAll(new Message(IO.Server.Models.Communication.Enums.EventType.CoordsChange, player));
         }
 
         public void Kill(ICommunicator com)
