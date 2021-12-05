@@ -10,6 +10,7 @@ namespace Agar.io.Models
         public double MaxSpeed { get; }
         public int Score { get; set; }
         public Vector Direction { get; set; }
+        public string Color { get; set; }
         public Player(string id, string name) : base(id, name)
         {
             Score = 0;

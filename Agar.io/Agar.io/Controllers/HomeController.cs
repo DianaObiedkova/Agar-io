@@ -29,24 +29,24 @@ namespace Agar.io.Controllers
             return View();
         }
 
-        public IActionResult KillPlayer(string id)
-        {
-            var player = Game.players.FirstOrDefault(x => x.Id == id);
-            if (player is null) return Index();
-            Game.EatOrRemovePlayer(player);
-            return Index();
-        }
+        //public IActionResult KillPlayer(string id)
+        //{
+        //    var player = Game.players.FirstOrDefault(x => x.Id == id);
+        //    if (player is null) return Index();
+        //    Game.EatOrRemovePlayer(player);
+        //    return Index();
+        //}
 
-        public IActionResult AddNewBot(int? count)
-        {
-            if (!count.HasValue)
-                count = 1;
+        //public IActionResult AddNewBot(int? count)
+        //{
+        //    if (!count.HasValue)
+        //        count = 1;
 
-            for (int i = 0; i < count.Value; i++)
-                Game.AddNewBotPlayer();
+        //    for (int i = 0; i < count.Value; i++)
+        //        Game.AddNewBotPlayer();
 
-            return Index();
-        }
+        //    return Index();
+        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
