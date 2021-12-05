@@ -114,6 +114,48 @@ namespace Agar.io.Models
             return newBot;
         }
 
+        public bool CheckIntersection(Player player)
+        {
+            bool dead = false;
+
+            foreach (var (com, pl) in players.Tuples())
+            {
+                if (player.IsIntersecting(pl))
+                {
+                    Player killed, extended;
+
+                    if (player.Weight > pl.Weight)
+                    {
+                        killed = pl;
+                        extended = player;
+                    }
+                    else if(player.Weight < pl.Weight)
+                    {
+                        killed = player;
+                        extended = pl;
+                        dead = true;
+                    }
+                    else { return false; }
+
+                    extended.Eat(killed);
+                    Kill(players.FirstOrDefault(x => x.Value == killed).Key);
+                    TransferToAll(new Message(IO.Server.Models.Communication.Enums.EventType.SizeChange, extended));
+
+                }
+
+            }
+
+            return dead;
+        }
+
+        public void Kill(ICommunicator com)
+        {
+            players.TryGetValue(com, out Player player);
+            TransferToAll(new Message(IO.Server.Models.Communication.Enums.EventType.Die, player));
+            players.Remove(com);
+            lastUpdate.Remove(com);
+        }
+
         private void TransferToAll(Message message)
         {
             foreach (var (id, value) in players.Tuples())
