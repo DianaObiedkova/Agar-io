@@ -5,6 +5,7 @@
         this.position = player.position
         this.color = player.color
         this.weight = player.weight
+        this.speed = player.speed
         this.direction = UP
     }
 }
