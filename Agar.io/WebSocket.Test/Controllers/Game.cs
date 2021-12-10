@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Agar.IO.Server.Console
 {
-    class Game
+    public class Game
     {
         public List<Player> Players { get; set; }
         public List<Food> FoodList { get; set; }

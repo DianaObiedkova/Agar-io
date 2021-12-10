@@ -1,4 +1,5 @@
-﻿using Agar.IO.Server.Console.Models;
+﻿using Agar.IO.Server.Console.Controllers;
+using Agar.IO.Server.Console.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,6 +14,7 @@ namespace Agar.IO.Server.Console
 
         public readonly static Random random = new Random();
         public Game Game { get; set; }
+        public ConnectionController ConnectionController { get; set; }
 
         private Game NewGame()
         {
