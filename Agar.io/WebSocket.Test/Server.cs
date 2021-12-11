@@ -1,8 +1,10 @@
 ﻿using Agar.IO.Server.Console.Controllers;
 using Agar.IO.Server.Console.Models;
+using Agar.IO.Server.Console.Models.Commands;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Agar.IO.Server.Console
 {
@@ -30,6 +32,13 @@ namespace Agar.IO.Server.Console
         public void Start()
         {
             Game = NewGame();
+        }
+
+        internal async Task RemovePlayer(string playerName, string message)
+        {
+            await ConnectionController.SendToClient(playerName, new End(message));
+            Game.Players.RemoveAll(x => x.Name.Equals(playerName));
+            ConnectionController.EndConnection(playerName);
         }
     }
 }

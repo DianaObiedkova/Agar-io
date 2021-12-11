@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Agar.IO.Server.Console
 {
-    class ClientConnection
+    public class ClientConnection:IDisposable
     {
         public string PlayerName { get; set; }
         public int LastUpdate { get; set; }
         UdpClient UdpClient { get; set; }
+        public bool IsClosed { get; set; }
 
         public async Task SendAsync(string message)
         {
@@ -26,6 +27,12 @@ namespace Agar.IO.Server.Console
         public string GetMessage(UdpReceiveResult res)
         {
             return Encoding.UTF8.GetString(res.Buffer);
+        }
+
+        public void Dispose()
+        {
+            if (UdpClient != null)
+                UdpClient.Dispose();
         }
     }
 }

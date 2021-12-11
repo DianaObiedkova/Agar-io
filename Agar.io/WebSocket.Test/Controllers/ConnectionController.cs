@@ -22,5 +22,18 @@ namespace Agar.IO.Server.Console.Controllers
             ClientConnection con = Connections.FirstOrDefault(x => x.PlayerName.Equals(name));
             if (!(con is null))  await con.SendAsync(stream.ToArray());
         }
+
+        internal void EndConnection(string playerName)
+        {
+            EndConnection(Connections.Find(x => x.PlayerName.Equals(playerName)));
+        }
+
+        private void EndConnection(ClientConnection clientConnection)
+        {
+            clientConnection.IsClosed = true;
+            Connections.Remove(clientConnection);
+            Console.WriteLine($"Player stops {clientConnection.PlayerName}");
+            clientConnection.Dispose();
+        }
     }
 }
