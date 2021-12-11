@@ -6,6 +6,9 @@ const LEFT = 3
 const fieldWidth = 1000
 const fieldHeight = 1000
 
+const visibleWidth = document.client.clientWidth
+const visibleHeight = document.client.clientHeight
+
 var currentPlayer = null;
 var playersList = new PlayersList();
 
@@ -15,8 +18,8 @@ socket.onclose = onClose;
 
 var field = document.getElementById("game-field")
 
-field.width = fieldWidth
-field.height = fieldHeight
+field.width = visibleWidth
+field.height = visibleHeight
 
 var ctx = field.getContext("2d");
 console.log(ctx);
@@ -94,6 +97,19 @@ function onMessage(e) {
 }
 
 function update() {
+    ctx.clearRect(0, 0, field.width, field.height);
+    let x0 = 0, y0 = 0;
+
+    //x0 and y0 changes
+
+    playerList.toArray().forEach(function (item) {
+        if (item.equals(currentPlayer)) {
+            item.currentDraw(ctx, x0, y0);
+        }
+        else {
+            item.draw(ctx, x0, y0);
+        }
+    });
 
 }
 

@@ -6,8 +6,12 @@ using System.Text;
 namespace Agar.IO.Server.Console.Models.Commands
 {
     [ProtoContract]
-    abstract class BaseCommand
+    class Invalid:BaseCommand
     {
-        public virtual void Execute(Server server, string name) { }
+        public string Message { get; set; }
+        public Invalid(string message)
+        {
+            Message = message;
+        }
     }
 }
