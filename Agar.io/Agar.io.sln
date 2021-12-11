@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agar.IO.Client", "Agar.IO.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agar.IO.Server.Console", "WebSocket.Test\Agar.IO.Server.Console.csproj", "{004897B8-5F6B-4CB3-BBDC-A5AB8D1E318D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agar.IO.Client.WinForms", "Agar.IO.Client.Console\Agar.IO.Client.WinForms.csproj", "{488C854C-D901-4E9A-A385-1126F5EE127F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{004897B8-5F6B-4CB3-BBDC-A5AB8D1E318D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{004897B8-5F6B-4CB3-BBDC-A5AB8D1E318D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{004897B8-5F6B-4CB3-BBDC-A5AB8D1E318D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{488C854C-D901-4E9A-A385-1126F5EE127F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{488C854C-D901-4E9A-A385-1126F5EE127F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{488C854C-D901-4E9A-A385-1126F5EE127F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{488C854C-D901-4E9A-A385-1126F5EE127F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

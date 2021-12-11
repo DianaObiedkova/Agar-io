@@ -1,18 +1,20 @@
 ﻿using ProtoBuf;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
-namespace Agar.IO.Server.Console.Models.Commands
+namespace Agar.IO.Client.WinForms.Models.Commands
 {
     [ProtoContract]
-    class End:BaseCommand
+    class End : BaseCommand
     {
         [ProtoMember(1)]
         public string Message { get; set; }
-        public override async void Execute(Server server, string playerName)
+        public override async void Execute(Game game)
         {
-            await server.RemovePlayer(playerName, Message);
+            Debug.WriteLine("Stop..");
+            game.Close(Message);
         }
         public End() { }
         public End(string Message)
