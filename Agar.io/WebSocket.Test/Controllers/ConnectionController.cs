@@ -32,7 +32,7 @@ namespace Agar.IO.Server.Console.Controllers
         {
             clientConnection.IsClosed = true;
             Connections.Remove(clientConnection);
-            Console.WriteLine($"Player stops {clientConnection.PlayerName}");
+            //Console.WriteLine($"Player stops {clientConnection.PlayerName}");
             clientConnection.Dispose();
         }
     }
