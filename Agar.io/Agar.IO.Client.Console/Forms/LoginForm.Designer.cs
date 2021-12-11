@@ -90,9 +90,9 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox tbLogin;
+        public System.Windows.Forms.TextBox tbLogin;
         private System.Windows.Forms.Button bLogin;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label infoLabel;
+        public System.Windows.Forms.Label infoLabel;
     }
 }

@@ -1,5 +1,9 @@
-﻿using System;
+﻿using Agar.IO.Client.WinForms.Models.Commands;
+using ProtoBuf;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -48,6 +52,55 @@ namespace Agar.IO.Client.WinForms
 
             con.Dispose();
             throw new TimeoutException("Cannot connect to the server!");
+        }
+
+        internal async Task SendAsync(BaseCommand com)
+        {
+            var stream = new MemoryStream();
+            Serializer.Serialize(stream, com);
+            stream.Seek(0, SeekOrigin.Begin);
+            var res = UdpServer.SendAsync(stream.ToArray(), stream.ToArray().Length);
+            await res;
+
+            //Debug.WriteLine("Sending {0}", command.GetType());
+
+            if (res.Exception != null)
+                Debug.WriteLine(res.Exception);
+        }
+
+        internal async void StartReceiving(Action<BaseCommand> onCommandReceived)
+        {
+            while (true)
+            {
+                if (IsClosed)
+                    break;
+                var task = ReceiveCommandAsync();
+                if(await Task.WhenAny(task, Task.Delay(1000)) == task)
+                {
+                    onCommandReceived(task.Result);
+                }
+                else
+                {
+                    onCommandReceived(new End("The server no longer responds"));
+                }
+            }
+        }
+
+        internal async Task<BaseCommand> ReceiveCommandAsync()
+        {
+            while (true)
+            {
+                var data = await ReceiveBinaryAsync();
+                var stream = new MemoryStream(data);
+                try
+                {
+                    return Serializer.Deserialize<BaseCommand>(stream);
+                }
+                catch (ProtoException)
+                {
+                    // ignore this type of exception (multiple ACK ...), wait for first command
+                }
+            }
         }
 
         private async Task SendAsync(string v)

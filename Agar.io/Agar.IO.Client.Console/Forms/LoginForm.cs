@@ -11,15 +11,16 @@ namespace Agar.IO.Client.WinForms.Forms
 {
     public partial class LoginForm : Form
     {
+        LoginController LoginController { get; set; }
         public LoginForm()
         {
             InitializeComponent();
         }
 
-        private async void bLogin_Click(object sender, EventArgs e)
+        private void bLogin_Click(object sender, EventArgs e)
         {
             infoLabel.Text = "Logging in ...";
-            await LoginController.StartGame();
+            LoginController.StartGame();
         }
     }
 }
