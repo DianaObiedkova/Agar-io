@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Agar.IO.Server.Console;
+using System;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
@@ -9,6 +10,13 @@ namespace WebSocket.Test
     class Program
     {
         static async Task Main(string[] args)
+        {
+            var game = new Server();
+            game.Start();
+            //await WebSocketOperation();
+        }
+
+        static async Task WebSocketOperation()
         {
             Console.WriteLine("press enter to continue...");
             Console.ReadLine();

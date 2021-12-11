@@ -1,24 +1,24 @@
 ﻿class PlayersList {
     constructor() {
-        this.persons = []
+        this.players = []
     }
 
-    add(person) {
-        this.persons.push(person)
+    add(player) {
+        this.players.push(player)
     }
 
-    remove(person) {
+    remove(player) {
+        let index = this.getArrayIndex(player)
+        this.players.splice(index, 1)
+    }
+
+    change(player) {
+        let index = this.getArrayIndex(player)
+        this.players[index].position = player.position
+    }
+
+    resize(player) {
         let index = this.getArrayIndex(person)
-        this.persons.splice(index, 1)
-    }
-
-    change(person) {
-        let index = this.getArrayIndex(person)
-        this.persons[index].position = person.position
-    }
-
-    resize(person) {
-        let index = this.getArrayIndex(person)
-        this.persons[index].size = person.size
+        this.players[index].size = player.size
     }
 }
