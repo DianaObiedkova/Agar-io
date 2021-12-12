@@ -3,14 +3,18 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Agar.IO.Server.Console.Models
+namespace Agar.IO.Client.WinForms.Models
 {
+    
     [ProtoContract]
+    [ProtoInclude(5, typeof(Food))]
+    [ProtoInclude(6, typeof(Player))]
     public abstract class Entity
     {
         [ProtoMember(1)]
         public int Weight { get; set; }
-        public double Radius => Math.Sqrt(Weight / Math.PI);
+        [ProtoIgnore]
+        public double Radius => 10 * Math.Sqrt(Weight / Math.PI);
         [ProtoMember(2)]
         public double X { get; set; }
         [ProtoMember(3)]

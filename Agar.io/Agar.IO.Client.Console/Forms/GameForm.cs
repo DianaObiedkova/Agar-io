@@ -14,5 +14,10 @@ namespace Agar.IO.Client.WinForms.Forms
         {
             InitializeComponent();
         }
+
+        private void GameForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -7,8 +7,8 @@ namespace Agar.IO.Client.WinForms.Handlers
 {
     abstract class Handler
     {
-        public float X { get; set; }
-        public float Y { get; set; }
+        public double X { get; set; }
+        public double Y { get; set; }
 
         protected Handler(Position pos)
         {

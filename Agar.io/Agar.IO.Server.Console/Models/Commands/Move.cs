@@ -70,7 +70,7 @@ namespace Agar.IO.Server.Console.Models.Commands
             return invalid;
         }
 
-        private bool ExecuteEatingFood(Player player, Game game)
+        private bool ExecuteEatingFood(Player player, GameState game)
         {
             var invalid = false;
             var eatenFood = new List<Food>();

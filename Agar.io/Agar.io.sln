@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agar.IO.Server", "Agar.io\A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agar.IO.Client", "Agar.IO.Client\Agar.IO.Client.csproj", "{5C1FDF52-A224-4C20-B870-C05C8B4FCC5E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agar.IO.Server.Console", "WebSocket.Test\Agar.IO.Server.Console.csproj", "{004897B8-5F6B-4CB3-BBDC-A5AB8D1E318D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agar.IO.Server.Console", "Agar.IO.Server.Console\Agar.IO.Server.Console.csproj", "{004897B8-5F6B-4CB3-BBDC-A5AB8D1E318D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agar.IO.Client.WinForms", "Agar.IO.Client.Console\Agar.IO.Client.WinForms.csproj", "{488C854C-D901-4E9A-A385-1126F5EE127F}"
 EndProject
