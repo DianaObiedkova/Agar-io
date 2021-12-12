@@ -6,8 +6,8 @@ using System.Text;
 namespace Agar.IO.Server.Console.Models.Commands
 {
     [ProtoContract]
-    abstract class BaseCommand
+    internal abstract class BaseCommand
     {
-        public abstract void Execute(Server server, string name);
+        internal abstract void Execute(Server server, string name);
     }
 }

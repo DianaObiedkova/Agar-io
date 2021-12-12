@@ -1,4 +1,5 @@
 ﻿using Agar.IO.Server.Console;
+using Agar.IO.Server.Console.Controllers;
 using System;
 using System.Net.WebSockets;
 using System.Text;
@@ -11,9 +12,19 @@ namespace WebSocket.Test
     {
         static async Task Main(string[] args)
         {
-            var game = new Server();
+            var ConnectionController = new ConnectionController();
+            Console.WriteLine("Connection started...");
+            var task = ConnectionController.StartListeningAsync();
+
+            Console.WriteLine("New game!");
+            var game = new Server(ConnectionController);
             game.Start();
+            Console.WriteLine("Server started...");
             //await WebSocketOperation();
+
+            Console.WriteLine("Waiting for the connection controller task to complete.");
+            if (!task.IsCompleted)
+                task.Wait();
         }
 
         static async Task WebSocketOperation()

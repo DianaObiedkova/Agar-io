@@ -15,6 +15,7 @@ namespace Agar.IO.Client.WinForms.Forms
         public LoginForm()
         {
             InitializeComponent();
+            LoginController = new LoginController(this);
         }
 
         private void bLogin_Click(object sender, EventArgs e)

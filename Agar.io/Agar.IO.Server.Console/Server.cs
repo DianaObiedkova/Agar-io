@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Agar.IO.Server.Console
 {
-    class Server
+    internal class Server
     {
         public const int maxFoodAmount = 100;
         public const int fieldWidth = 3000;
@@ -17,7 +17,10 @@ namespace Agar.IO.Server.Console
         public readonly static Random random = new Random();
         public GameState Game { get; set; }
         public ConnectionController ConnectionController { get; set; }
-
+        public Server(ConnectionController connectionManager)
+        {
+            ConnectionController = connectionManager;
+        }
         private GameState NewGame()
         {
             var game = new GameState();
