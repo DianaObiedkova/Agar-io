@@ -106,14 +106,14 @@ namespace Agar.IO.Server.Console
 
                 for (int i = 0; i < 3; i++)
                 {
-                    loginServer.SendAsync("CONNECTED " + (conn.UdpClient.Client.LocalEndPoint as IPEndPoint).Port);
+                    await loginServer.SendAsync("CONNECTED " + (conn.UdpClient.Client.LocalEndPoint as IPEndPoint).Port);
 
                     var connectionResult = conn.UdpClient.ReceiveAsync();
                     if (connectionResult == await Task.WhenAny(Task.Delay(1000), connectionResult))
                     {
                         var message = Encoding.Default.GetString(connectionResult.Result.Buffer);
 
-                        if (message == "ACK")
+                        if (message == "OK!")
                         {
                             conn.UdpClient.Connect(connectionResult.Result.RemoteEndPoint);
                             //Console.WriteLine($"{connectionResult.Result.RemoteEndPoint.Address}:{connectionResult.Result.RemoteEndPoint.Port} has connected!");

@@ -40,8 +40,9 @@ namespace Agar.IO.Client.WinForms
                     switch (result.Split()[0])
                     {
                         case "CONNECTED":
-                            con.UdpServer.Connect(address, int.Parse(result.Split()[0]));
-                            for (int j = 0; j < 3; j++) await con.SendAsync("OK!");
+                            con.UdpServer.Connect(address, int.Parse(result.Split()[1]));
+                            for (int j = 0; j < 3; j++) 
+                                await con.SendAsync("OK!");
                             return con;
                         case "ERROR":
                             con.Dispose();
