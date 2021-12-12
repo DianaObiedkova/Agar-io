@@ -9,7 +9,7 @@ namespace Agar.IO.Client.WinForms.Models.Commands
     class Move : BaseCommand
     {
         [ProtoMember(1)]
-        public List<Tuple<int, float, float, float>> Movement { get; set; }
+        public List<Tuple<double, double, double>> Movement { get; set; }
         [ProtoMember(2)]
         public long Time { get; set; }
 

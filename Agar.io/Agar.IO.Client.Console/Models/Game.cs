@@ -1,4 +1,5 @@
 ﻿using Agar.IO.Client.WinForms.Controllers;
+using Agar.IO.Client.WinForms.Handlers;
 using Agar.IO.Client.WinForms.Models.Commands;
 using System;
 using System.Collections.Generic;
@@ -67,28 +68,25 @@ namespace Agar.IO.Client.WinForms.Models
 
         private void Loop()
         {
-            //long delta = 0;
-            //long a = 0, b = 0;
+            long a = 0;
 
-            //while (true)
-            //{
-            //    if (!IsRunning)
-            //        break;
-            //    b = Stopwatch.GetTimestamp();
-            //    delta = 1000 * (b - a) / Stopwatch.Frequency;
-            //    if (delta < Interval) continue;
+            while (true)
+            {
+                if (!IsRunning)
+                    break;
+                long b = Stopwatch.GetTimestamp();
+                long delta = 1000 * (b - a) / Stopwatch.Frequency;
+                if (delta < Interval) continue;
 
-            //    if (GameState?.CurrentPlayer != null)
-            //    {
-            //        new MovementAction(InputContr.MousePosition).Process(this);
+                if (GameState?.CurrentPlayer != null)
+                {
+                    new MovementHandler(InputContr.MousePosition).Execute(this);
 
-            //        // deep clone of prediction
-            //        var gameStateForRendering = GameState.DeepClonePrediction();
-
-            //        Graphics.Render(gameStateForRendering);
-            //    }
-            //    a = Stopwatch.GetTimestamp();
-            //}
+                    var gameStateForRendering = GameState.DeepClonePrediction();
+                    Graph.Render(gameStateForRendering);
+                }
+                a = Stopwatch.GetTimestamp();
+            }
         }
     }
 }

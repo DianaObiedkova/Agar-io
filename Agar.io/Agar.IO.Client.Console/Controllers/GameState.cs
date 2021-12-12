@@ -16,7 +16,6 @@ namespace Agar.IO.Client.WinForms.Controllers
             Players = new List<Player>();
             FoodList = new List<Food>();
         }
-
         public GameState DeepClonePrediction()
         {
             var copy = (GameState)MemberwiseClone();

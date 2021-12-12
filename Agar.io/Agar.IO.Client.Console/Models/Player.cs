@@ -16,6 +16,17 @@ namespace Agar.IO.Client.WinForms.Models
         public long FirstMovementServerTime { get; set; }
         [ProtoMember(2)]
         public bool IsBeingEjected { get; set; }
+        public double Speed
+        {
+            get
+            {
+                return Radius * 0.8;
+            }
+        }
 
+        public Player Clone()
+        {
+            return (Player)MemberwiseClone();
+        }
     }
 }
