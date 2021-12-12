@@ -9,7 +9,7 @@ namespace Agar.IO.Server.Console
 {
     class ServerLogin : UdpClient
     {
-        public readonly static int serverPort = 11000; //https://docs.microsoft.com/en-us/dotnet/api/system.net.sockets.udpclient?view=net-6.0
+        public readonly static int serverPort = 11028; //https://docs.microsoft.com/en-us/dotnet/api/system.net.sockets.udpclient?view=net-6.0
         ServerLogin(IPEndPoint endpoint) : base(endpoint) { }
         public static ServerLogin NewInstance()
         {

@@ -77,7 +77,7 @@ namespace Agar.IO.Server.Console
                 while (true)
                 {
                     var connectionResult = await loginServer.ReceiveAsync();
-                    var message = Encoding.Default.GetString(connectionResult.Buffer);
+                    var message = GetMessageFromUdpReceiveResult(connectionResult);
 
                     if (message.Split().Length >= 2 && message.Split()[0] == "CONNECT")
                     {
@@ -109,9 +109,9 @@ namespace Agar.IO.Server.Console
                     await loginServer.SendAsync("CONNECTED " + (conn.UdpClient.Client.LocalEndPoint as IPEndPoint).Port);
 
                     var connectionResult = conn.UdpClient.ReceiveAsync();
-                    if (connectionResult == await Task.WhenAny(Task.Delay(1000), connectionResult))
+                    if (await Task.WhenAny(Task.Delay(1000), connectionResult) == connectionResult)
                     {
-                        var message = Encoding.Default.GetString(connectionResult.Result.Buffer);
+                        var message = GetMessageFromUdpReceiveResult(connectionResult.Result);
 
                         if (message == "OK!")
                         {
@@ -123,6 +123,12 @@ namespace Agar.IO.Server.Console
                     }
                 }
             }
+        }
+
+        public static string GetMessageFromUdpReceiveResult(UdpReceiveResult result)
+        {
+            var message = Encoding.Default.GetString(result.Buffer);
+            return message;
         }
     }
 }

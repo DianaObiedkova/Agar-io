@@ -13,7 +13,7 @@ namespace Agar.IO.Client.WinForms
 {
     class ServerConnection:IDisposable
     {
-        private static int LoginServerPort = 11000;
+        private static int LoginServerPort = 11028;
         private UdpClient UdpServer;
         private bool IsClosed { get; set; }
 
@@ -21,11 +21,12 @@ namespace Agar.IO.Client.WinForms
         {
             var con = new ServerConnection
             {
-                UdpServer = new UdpClient(new IPEndPoint(IPAddress.Any, 0)),
-                IsClosed = false
+                UdpServer = new UdpClient(new IPEndPoint(IPAddress.Any, 0))
             };
             con.UdpServer.Connect(address, LoginServerPort);
+            con.IsClosed = false;
 
+            Debug.WriteLine("CONNECTING");
             var task = con.ReceiveAsync();
             string result;
 
@@ -42,7 +43,7 @@ namespace Agar.IO.Client.WinForms
                         case "CONNECTED":
                             con.UdpServer.Connect(address, int.Parse(result.Split()[1]));
                             for (int j = 0; j < 3; j++) 
-                                await con.SendAsync("OK!");
+                                con.SendAsync("OK!");
                             return con;
                         case "ERROR":
                             con.Dispose();

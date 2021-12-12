@@ -14,7 +14,7 @@ namespace Agar.IO.Server.Console.Models.Commands
         [ProtoMember(2)]
         public long Time { get; set; }
         
-        public override async void Execute(Server server, string name)
+        internal override async void Execute(Server server, string name)
         {
             bool invalid = false;
             var game = server.Game;

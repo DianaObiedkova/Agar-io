@@ -14,7 +14,7 @@ namespace Agar.IO.Server.Console.Models.Commands
         {
             GameState = gameState;
         }
-        public override void Execute(Server server, string name)
+        internal override void Execute(Server server, string name)
         {
             throw new NotImplementedException();
         }
