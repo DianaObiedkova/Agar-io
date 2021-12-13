@@ -37,6 +37,7 @@ namespace Agar.IO.Client.WinForms
                 if(await Task.WhenAny(task, Task.Delay(1000)) == task)
                 {
                     result = task.Result;
+                    con.UdpServer.Close();
 
                     switch (result.Split()[0])
                     {
