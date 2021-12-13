@@ -30,11 +30,8 @@ namespace Agar.IO.Client.WinForms.Controllers
 
         private void UpdateMousePosition()
         {
-            double posX = 0, posY = 0;
-
-            posX = gameForm.GamePanel.PointToClient(Cursor.Position).X;
-            posY = gameForm.GamePanel.PointToClient(Cursor.Position).Y;
-
+            double posX = gameForm.GamePanel.PointToClient(Cursor.Position).X;
+            double posY = gameForm.GamePanel.PointToClient(Cursor.Position).Y;
             if (game.GameState == null)
                 return;
 

@@ -10,7 +10,7 @@ namespace WebSocket.Test
 {
     class Program
     {
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
             var ConnectionController = new ConnectionController();
             Console.WriteLine("Connection started...");

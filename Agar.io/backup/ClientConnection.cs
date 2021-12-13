@@ -1,16 +1,4 @@
-﻿using Agar.IO.Server.Console.Models.Commands;
-using ProtoBuf;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Agar.IO.Server.Console
-{
-    public class ClientConnection:IDisposable
+ public class ClientConnection:IDisposable
     {
         public string PlayerName { get; set; }
         public int LastUpdate { get; set; }
@@ -39,10 +27,6 @@ namespace Agar.IO.Server.Console
             await SendAsync(stream.ToArray());
         }
 
-        public string GetMessage(UdpReceiveResult res)
-        {
-            return Encoding.UTF8.GetString(res.Buffer);
-        }
 
         public void Dispose()
         {
@@ -82,8 +66,8 @@ namespace Agar.IO.Server.Console
                     if (message.Split().Length >= 2 && message.Split()[0] == "CONNECT")
                     {
                         var name = message.Substring(8);
-
-                        if (clientAuthorizer(name, connectionResult.RemoteEndPoint, out string authorizerOutputMessage))
+                        string authorizerOutputMessage;
+                        if (clientAuthorizer(name, connectionResult.RemoteEndPoint, out  authorizerOutputMessage))
                         {
                             loginServer.Connect(connectionResult.RemoteEndPoint);
                             conn.PlayerName = name;
@@ -106,8 +90,8 @@ namespace Agar.IO.Server.Console
                 {
                     await loginServer.SendAsync("CONNECTED " + (conn.UdpClient.Client.LocalEndPoint as IPEndPoint).Port);
 
-                    var connectionResult = conn.UdpClient.ReceiveAsync();
-                    if (await Task.WhenAny(Task.Delay(1000), connectionResult) == connectionResult)
+                    var connectionResult = conn.UdpClient.ReceiveAsync(); //loginServer.ReceiveAsync();
+                    if (connectionResult == await Task.WhenAny(Task.Delay(1000), connectionResult))
                     {
                         var message = GetMessageFromUdpReceiveResult(connectionResult.Result);
 
@@ -129,4 +113,3 @@ namespace Agar.IO.Server.Console
             return message;
         }
     }
-}

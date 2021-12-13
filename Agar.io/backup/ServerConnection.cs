@@ -1,17 +1,4 @@
-﻿using Agar.IO.Client.WinForms.Models.Commands;
-using ProtoBuf;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Agar.IO.Client.WinForms
-{
-    class ServerConnection:IDisposable
+class ServerConnection: IDisposable
     {
         private static int LoginServerPort = 11028;
         private UdpClient UdpServer;
@@ -37,16 +24,15 @@ namespace Agar.IO.Client.WinForms
                 if(await Task.WhenAny(task, Task.Delay(1000)) == task)
                 {
                     result = task.Result;
-                    con.UdpServer.Close();
+                    
 
                     switch (result.Split()[0])
                     {
                         case "CONNECTED":
-
-                            con.UdpServer = new UdpClient(new IPEndPoint(IPAddress.Any, 0));
                             con.UdpServer.Connect(address, int.Parse(result.Split()[1]));
                             for (int j = 0; j < 3; j++) 
                                 con.SendAsync("OK!");
+                            //con.UdpServer.Dispose();
                             return con;
                         case "ERROR":
                             con.Dispose();
@@ -131,4 +117,3 @@ namespace Agar.IO.Client.WinForms
             IsClosed = true;
         }
     }
-}
