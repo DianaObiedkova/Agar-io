@@ -57,6 +57,7 @@ namespace Agar.IO.Server.Console
 
             Game.GameStateLock.EnterWriteLock();
             ConnectionController.SendToAllClients(new UpdateState(Game));
+            Game.GameStateLock.ExitWriteLock();
         }
 
         internal async Task RemovePlayer(string playerName, string message)

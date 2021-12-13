@@ -81,9 +81,7 @@ namespace Agar.IO.Server.Console
 
                     if (message.Split().Length >= 2 && message.Split()[0] == "CONNECT")
                     {
-                        var tokens = message.Split();
                         var name = message.Substring(8);
-
 
                         if (clientAuthorizer(name, connectionResult.RemoteEndPoint, out string authorizerOutputMessage))
                         {
@@ -108,8 +106,8 @@ namespace Agar.IO.Server.Console
                 {
                     await loginServer.SendAsync("CONNECTED " + (conn.UdpClient.Client.LocalEndPoint as IPEndPoint).Port);
 
-                    var connectionResult = conn.UdpClient.ReceiveAsync();
-                    if (await Task.WhenAny(Task.Delay(1000), connectionResult) == connectionResult)
+                    var connectionResult = conn.UdpClient.ReceiveAsync(); //loginServer.ReceiveAsync();
+                    if (connectionResult == await Task.WhenAny(Task.Delay(1000), connectionResult))
                     {
                         var message = GetMessageFromUdpReceiveResult(connectionResult.Result);
 
