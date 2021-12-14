@@ -19,6 +19,7 @@ namespace Agar.IO.Client.WinForms.Models
         private Graphics Graph { get; set; }
         public GameState GameState { get; set; }
         public bool IsRunning { get; private set; }
+        public bool IsPredictionValid { get; set; }
 
         public const int FieldWidth = 3000;
 
