@@ -1,7 +1,6 @@
 ﻿using Agar.IO.Client.WinForms.Models.Commands;
 using ProtoBuf;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
@@ -103,7 +102,6 @@ namespace Agar.IO.Client.WinForms
                 }
                 catch (ProtoException e)
                 {
-                    // ignore this type of exception (multiple ACK ...), wait for first command
                 }
             }
         }

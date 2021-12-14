@@ -1,11 +1,9 @@
 ﻿using ProtoBuf;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Agar.IO.Client.WinForms.Models
 {
-    
+
     [ProtoContract]
     [ProtoInclude(5, typeof(Food))]
     [ProtoInclude(6, typeof(Player))]

@@ -1,7 +1,6 @@
 ﻿using ProtoBuf;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Agar.IO.Client.WinForms.Models.Commands
 {
@@ -13,9 +12,5 @@ namespace Agar.IO.Client.WinForms.Models.Commands
         [ProtoMember(2)]
         public long Time { get; set; }
 
-        public override void Execute(Game game)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

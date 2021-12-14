@@ -1,7 +1,4 @@
 ﻿using ProtoBuf;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Agar.IO.Client.WinForms.Models.Commands
 {
@@ -12,6 +9,6 @@ namespace Agar.IO.Client.WinForms.Models.Commands
     [ProtoInclude(4, typeof(UpdateState))]
     abstract class BaseCommand
     {
-        public abstract void Execute(Game game);
+        public virtual void Execute(Game game) { }
     }
 }

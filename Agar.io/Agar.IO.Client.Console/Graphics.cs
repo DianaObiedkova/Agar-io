@@ -1,8 +1,6 @@
 ﻿using Agar.IO.Client.WinForms.Controllers;
 using Agar.IO.Client.WinForms.Forms;
 using Agar.IO.Client.WinForms.Models;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -60,7 +58,7 @@ namespace Agar.IO.Client.WinForms
 
         private void DrawPlayers(System.Drawing.Graphics g)
         {
-            var playerssWithColorAndName = from player in GameStateCopy.Players select new { player.Color, PlayerName = player.Name, player.Radius, player.X, player.Y, player.IsBeingEjected };
+            var playerssWithColorAndName = from player in GameStateCopy.Players select new { player.Color, PlayerName = player.Name, player.Radius, player.X, player.Y};
             foreach (var player in playerssWithColorAndName)
             {
                 var radius = player.Radius;
@@ -72,12 +70,10 @@ namespace Agar.IO.Client.WinForms
                 g.FillEllipse(brush, (float)(player.X - radius),
                    (float)(player.Y - radius), (float)(2 * radius), (float)(2 * radius));
 
-                if (!player.IsBeingEjected) // рисуем имя игрока
-                {
-                    var myFont = new Font("Arial", 14);
-                    var sizeOfText = g.MeasureString(name, myFont);
-                    g.DrawString(name, myFont, Brushes.Black, (float)(player.X - sizeOfText.Width / 2), (float)(player.Y - sizeOfText.Height / 2));
-                }
+                var myFont = new Font("Arial", 14);
+                var sizeOfText = g.MeasureString(name, myFont);
+                g.DrawString(name, myFont, Brushes.Black, (float)(player.X - sizeOfText.Width / 2), (float)(player.Y - sizeOfText.Height / 2));
+               
             }
         }
 

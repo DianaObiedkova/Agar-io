@@ -1,8 +1,6 @@
 ﻿using Agar.IO.Client.WinForms.Controllers;
 using ProtoBuf;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Agar.IO.Client.WinForms.Models.Commands
 {
@@ -11,10 +9,6 @@ namespace Agar.IO.Client.WinForms.Models.Commands
     {
         [ProtoMember(1)]
         public GameState GameState { get; set; }
-        public UpdateState(GameState gameState)
-        {
-            GameState = gameState;
-        }
 
         public override void Execute(Game game)
         {
@@ -34,8 +28,6 @@ namespace Agar.IO.Client.WinForms.Models.Commands
             if (oldGameState != null)
                 return;
 
-
-            // prediction
             if (oldCurrentPlayer != null && game.IsPredictionValid)
             {
                 if (oldGameState.EatenFoodPrediction == null)

@@ -2,7 +2,6 @@
 using Agar.IO.Client.WinForms.Models.Commands;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Agar.IO.Client.WinForms.Handlers
 {
@@ -29,7 +28,6 @@ namespace Agar.IO.Client.WinForms.Handlers
             double vX = X - state.CurrentPlayer.X;
             double vY = Y - state.CurrentPlayer.Y;
 
-            // normalize
             double size = (float)(Math.Sqrt(vX * vX + vY * vY));
             if (size == 0)
                 return;
@@ -48,7 +46,6 @@ namespace Agar.IO.Client.WinForms.Handlers
             if (nextY < 0)
                 nextY = 0;
 
-            // food eating prediction
             var eatenFood = new List<Food>();
 
             foreach (var food in state.FoodList)

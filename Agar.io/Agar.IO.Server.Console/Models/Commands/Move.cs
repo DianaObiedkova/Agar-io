@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 
 namespace Agar.IO.Server.Console.Models.Commands
 {
@@ -80,8 +79,6 @@ namespace Agar.IO.Server.Console.Models.Commands
             {
                 if (CanBeEaten(item, player))
                 {
-                    //check validation
-
                     player.Weight += item.Weight;
                     eatenFood.Add(item);
                     newFood.Add(CreateFood());

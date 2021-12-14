@@ -2,10 +2,7 @@
 using Agar.IO.Client.WinForms.Handlers;
 using Agar.IO.Client.WinForms.Models.Commands;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Agar.IO.Client.WinForms.Models

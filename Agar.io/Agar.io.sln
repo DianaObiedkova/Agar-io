@@ -9,26 +9,33 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agar.IO.Client", "Agar.IO.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agar.IO.Server.Console", "Agar.IO.Server.Console\Agar.IO.Server.Console.csproj", "{004897B8-5F6B-4CB3-BBDC-A5AB8D1E318D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agar.IO.Client.WinForms", "Agar.IO.Client.Console\Agar.IO.Client.WinForms.csproj", "{488C854C-D901-4E9A-A385-1126F5EE127F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agar.IO.Client.WinForms", "Agar.IO.Client.Console\Agar.IO.Client.WinForms.csproj", "{488C854C-D901-4E9A-A385-1126F5EE127F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Agar.IO.Main.Configuration|Any CPU = Agar.IO.Main.Configuration|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F72B3577-E449-4463-B7FC-35715380234A}.Agar.IO.Main.Configuration|Any CPU.ActiveCfg = Agar.IO.Main.Configuration|Any CPU
 		{F72B3577-E449-4463-B7FC-35715380234A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F72B3577-E449-4463-B7FC-35715380234A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F72B3577-E449-4463-B7FC-35715380234A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F72B3577-E449-4463-B7FC-35715380234A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C1FDF52-A224-4C20-B870-C05C8B4FCC5E}.Agar.IO.Main.Configuration|Any CPU.ActiveCfg = Agar.IO.Main.Configuration|Any CPU
 		{5C1FDF52-A224-4C20-B870-C05C8B4FCC5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5C1FDF52-A224-4C20-B870-C05C8B4FCC5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C1FDF52-A224-4C20-B870-C05C8B4FCC5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C1FDF52-A224-4C20-B870-C05C8B4FCC5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{004897B8-5F6B-4CB3-BBDC-A5AB8D1E318D}.Agar.IO.Main.Configuration|Any CPU.ActiveCfg = Agar.IO.Main.Configuration|Any CPU
+		{004897B8-5F6B-4CB3-BBDC-A5AB8D1E318D}.Agar.IO.Main.Configuration|Any CPU.Build.0 = Agar.IO.Main.Configuration|Any CPU
 		{004897B8-5F6B-4CB3-BBDC-A5AB8D1E318D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{004897B8-5F6B-4CB3-BBDC-A5AB8D1E318D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{004897B8-5F6B-4CB3-BBDC-A5AB8D1E318D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{004897B8-5F6B-4CB3-BBDC-A5AB8D1E318D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{488C854C-D901-4E9A-A385-1126F5EE127F}.Agar.IO.Main.Configuration|Any CPU.ActiveCfg = Agar.IO.Main.Configuration|Any CPU
+		{488C854C-D901-4E9A-A385-1126F5EE127F}.Agar.IO.Main.Configuration|Any CPU.Build.0 = Agar.IO.Main.Configuration|Any CPU
 		{488C854C-D901-4E9A-A385-1126F5EE127F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{488C854C-D901-4E9A-A385-1126F5EE127F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{488C854C-D901-4E9A-A385-1126F5EE127F}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Agar.IO.Client.WinForms.Models
+﻿namespace Agar.IO.Client.WinForms.Models
 {
     struct Position
     {

@@ -1,10 +1,8 @@
 ﻿using Agar.IO.Client.WinForms.Forms;
 using Agar.IO.Client.WinForms.Models;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Agar.IO.Client.WinForms.Controllers

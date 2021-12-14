@@ -1,8 +1,6 @@
 ﻿using Agar.IO.Client.WinForms.Models;
 using ProtoBuf;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Agar.IO.Client.WinForms.Controllers
 {

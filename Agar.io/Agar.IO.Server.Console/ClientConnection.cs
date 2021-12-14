@@ -1,7 +1,6 @@
 ﻿using Agar.IO.Server.Console.Models.Commands;
 using ProtoBuf;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -89,8 +88,8 @@ namespace Agar.IO.Server.Console
                         else
                         {
                             loginServer.Connect(connectionResult.RemoteEndPoint);
-                            //Console.WriteLine("Connection not allowed for {0}:{1} with desired name {2}",
-                            //    connectionResult.RemoteEndPoint.Address, connectionResult.RemoteEndPoint.Port, name);
+                            System.Console.WriteLine("Connection not allowed for {0}:{1} with desired name {2}",
+                                connectionResult.RemoteEndPoint.Address, connectionResult.RemoteEndPoint.Port, name);
                             await loginServer.SendAsync($"ERROR {authorizerOutputMessage}");
                             loginServer.Dispose();
                             loginServer = ServerLogin.NewInstance();
@@ -110,7 +109,7 @@ namespace Agar.IO.Server.Console
                         if (message == "OK!")
                         {
                             conn.UdpClient.Connect(connectionResult.Result.RemoteEndPoint);
-                            //Console.WriteLine($"{connectionResult.Result.RemoteEndPoint.Address}:{connectionResult.Result.RemoteEndPoint.Port} has connected!");
+                            System.Console.WriteLine($"{connectionResult.Result.RemoteEndPoint.Address}:{connectionResult.Result.RemoteEndPoint.Port} has connected!");
                             loginServer.Dispose();
                             return conn;
                         }

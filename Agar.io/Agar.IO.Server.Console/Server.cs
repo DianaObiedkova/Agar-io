@@ -2,9 +2,6 @@
 using Agar.IO.Server.Console.Models;
 using Agar.IO.Server.Console.Models.Commands;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Agar.IO.Server.Console
 {

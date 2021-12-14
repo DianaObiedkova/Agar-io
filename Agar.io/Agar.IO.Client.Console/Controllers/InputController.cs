@@ -1,8 +1,5 @@
 ﻿using Agar.IO.Client.WinForms.Forms;
 using Agar.IO.Client.WinForms.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Agar.IO.Client.WinForms.Controllers
@@ -24,7 +21,7 @@ namespace Agar.IO.Client.WinForms.Controllers
 
         private void GamePanel_Paint(object sender, PaintEventArgs e)
         {
-            if (gameForm.GamePanel.Focused || gameForm.Focused) // TODO - remove condition - just for testing
+            if (gameForm.GamePanel.Focused || gameForm.Focused) 
                 UpdateMousePosition();
         }
 
@@ -35,10 +32,9 @@ namespace Agar.IO.Client.WinForms.Controllers
             if (game.GameState == null)
                 return;
 
-            // view to game coefficient
             float q = (float)((0.1 * gameForm.GamePanel.Width) / game.GameState.CurrentPlayer.Radius);
 
-            // opposite order!
+            
             posX -= gameForm.GamePanel.Width / 2.0f;
             posY -= gameForm.GamePanel.Height / 2.0f;
             if (q < 1)

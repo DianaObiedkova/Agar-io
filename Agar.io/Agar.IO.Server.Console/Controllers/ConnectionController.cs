@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Sockets;
-using System.Text;
 using System.Threading.Tasks;
 using static Agar.IO.Server.Console.ClientConnection;
 
@@ -27,7 +25,7 @@ namespace Agar.IO.Server.Console.Controllers
                 lock (Connections)
                 {
                     if (Connections.Any(c => c.PlayerName == newConnection.PlayerName))
-                        continue;           // already connected (... multiple connect packets from client)
+                        continue;           
 
                     System.Console.WriteLine($"Player {newConnection.PlayerName} has successfully connected!");
                     Connections.Add(newConnection);
@@ -44,8 +42,6 @@ namespace Agar.IO.Server.Console.Controllers
             stream.Seek(0, SeekOrigin.Begin);
 
             SendToClient(name, stream.ToArray());
-            //ClientConnection con = Connections.FirstOrDefault(x => x.PlayerName.Equals(name));
-            //if (!(con is null))  await con.SendAsync(stream.ToArray());
         }
 
         public void SendToClient(string name, byte[] stream)
@@ -93,15 +89,15 @@ namespace Agar.IO.Server.Console.Controllers
                 isNameAlreadyUsed = Connections.Exists(p => p.PlayerName == playerName);
             }
 
-            if (playerName.Length > 20) // maximum player name length
+            if (playerName.Length > 20) 
             {
-                outputMessage = $"Name is too long! Maximum allowed name length is 20.";
+                outputMessage = $"Name is very long! Maximum allowed length: 20";
                 return false;
             }
 
             if (isNameAlreadyUsed)
             {
-                outputMessage = $"Name {playerName} is already being used by another player!";
+                outputMessage = $"Name {playerName} is already being used!";
                 return false;
             }
 
@@ -114,8 +110,8 @@ namespace Agar.IO.Server.Console.Controllers
             while (!clientConnection.IsClosed)
             {
                 var receiveTask = clientConnection.ReceiveCommandAsync();
-                //var task = await Task.WhenAny(receiveTask, Task.Delay(5000));
-                if (receiveTask == await Task.WhenAny(receiveTask, Task.Delay(5000)))
+                var task = await Task.WhenAny(receiveTask, Task.Delay(5000));
+                if (receiveTask == task)//await Task.WhenAny(receiveTask, Task.Delay(5000)))
                 {
                     var command = receiveTask.Result;
                     System.Console.WriteLine("Player {0} sent: {1}", clientConnection.PlayerName, command.GetType());
