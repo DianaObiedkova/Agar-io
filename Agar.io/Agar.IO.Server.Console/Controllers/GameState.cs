@@ -1,18 +1,24 @@
 ﻿using Agar.IO.Server.Console.Models;
-using System;
+using ProtoBuf;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading;
 
 namespace Agar.IO.Server.Console
 {
-    public class Game
+    [ProtoContract]
+    public class GameState
     {
+        [ProtoMember(1)]
         public List<Player> Players { get; set; }
+        [ProtoMember(2)]
         public List<Food> FoodList { get; set; }
-        public Game()
+        [ProtoIgnore]
+        public ReaderWriterLockSlim GameStateLock { get; set; }
+        public GameState()
         {
             Players = new List<Player>();
             FoodList = new List<Food>();
+            GameStateLock = new ReaderWriterLockSlim();
         }
     }
 }

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Agar.IO.Client.WinForms.Models
+﻿namespace Agar.IO.Client.WinForms.Models
 {
     struct Position
     {
-        public float X;
-        public float Y;
+        public double X;
+        public double Y;
 
-        public Position(float x, float y)
+        public Position(double x, double y)
         {
             X = x;
             Y = y;

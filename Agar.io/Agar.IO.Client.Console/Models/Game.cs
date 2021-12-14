@@ -1,9 +1,8 @@
 ﻿using Agar.IO.Client.WinForms.Controllers;
+using Agar.IO.Client.WinForms.Handlers;
 using Agar.IO.Client.WinForms.Models.Commands;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Agar.IO.Client.WinForms.Models
@@ -15,7 +14,16 @@ namespace Agar.IO.Client.WinForms.Models
         public LoginController LoginContr { get; set; }
         private InputController InputContr { get; set; }
         private Graphics Graph { get; set; }
-        private bool IsRunning;
+        public GameState GameState { get; set; }
+        public bool IsRunning { get; private set; }
+        public bool IsPredictionValid { get; set; }
+
+        public const int FieldWidth = 3000;
+
+        public const int FieldHeight = 3000;
+        public const int Interval = 16;
+
+        public long Time;
 
         internal void Close(string message)
         {
@@ -39,12 +47,48 @@ namespace Agar.IO.Client.WinForms.Models
             PlayerName = name;
 
             Graph.StartGraph();
+            
             ServerConnection.StartReceiving(OnCommandReceived);
+
+            IsRunning = true;
+            Time = -1;
+            StartLoop();
         }
 
         internal void OnCommandReceived(BaseCommand com)
         {
-            com.Execute(this);
+            lock (this)
+            {
+                com.Execute(this);
+            }
+        }
+
+        private async Task StartLoop()
+        {
+            await Task.Factory.StartNew(Loop, TaskCreationOptions.LongRunning);
+        }
+
+        private void Loop()
+        {
+            long a = 0;
+
+            while (true)
+            {
+                if (!IsRunning)
+                    break;
+                long b = Stopwatch.GetTimestamp();
+                long delta = 1000 * (b - a) / Stopwatch.Frequency;
+                if (delta < Interval) continue;
+
+                if (GameState?.CurrentPlayer != null)
+                {
+                    new MovementHandler(InputContr.MousePosition).Execute(this);
+
+                    var gameStateForRendering = GameState.DeepClonePrediction();
+                    Graph.Render(gameStateForRendering);
+                }
+                a = Stopwatch.GetTimestamp();
+            }
         }
     }
 }

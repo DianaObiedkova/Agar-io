@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 
 namespace Agar.IO.Server.Console.Models.Commands
 {
@@ -14,7 +13,7 @@ namespace Agar.IO.Server.Console.Models.Commands
         [ProtoMember(2)]
         public long Time { get; set; }
         
-        public override async void Execute(Server server, string name)
+        internal override void Execute(Server server, string name)
         {
             bool invalid = false;
             var game = server.Game;
@@ -35,7 +34,7 @@ namespace Agar.IO.Server.Console.Models.Commands
             if (ExecuteEatingFood(player, server.Game)) invalid = true;
             if (ExecuteEatingPlayer(player, server)) invalid = true;
 
-            if (invalid) await server.ConnectionController.SendToClient(name, new Invalid("Invalid movement"));
+            if (invalid) server.ConnectionController.SendToClient(name, new Invalid("Invalid movement"));
         }
 
         private bool ExecuteEatingPlayer(Player player, Server server)
@@ -70,7 +69,7 @@ namespace Agar.IO.Server.Console.Models.Commands
             return invalid;
         }
 
-        private bool ExecuteEatingFood(Player player, Game game)
+        private bool ExecuteEatingFood(Player player, GameState game)
         {
             var invalid = false;
             var eatenFood = new List<Food>();
@@ -80,8 +79,6 @@ namespace Agar.IO.Server.Console.Models.Commands
             {
                 if (CanBeEaten(item, player))
                 {
-                    //check validation
-
                     player.Weight += item.Weight;
                     eatenFood.Add(item);
                     newFood.Add(CreateFood());

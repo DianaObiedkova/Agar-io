@@ -1,18 +1,6 @@
-﻿using Agar.IO.Client.WinForms.Models.Commands;
-using ProtoBuf;
-using System;
-using System.Diagnostics;
-using System.IO;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Agar.IO.Client.WinForms
-{
-    class ServerConnection:IDisposable
+class ServerConnection: IDisposable
     {
-        private static readonly int LoginServerPort = 11028;
+        private static int LoginServerPort = 11028;
         private UdpClient UdpServer;
         private bool IsClosed { get; set; }
 
@@ -36,16 +24,15 @@ namespace Agar.IO.Client.WinForms
                 if(await Task.WhenAny(task, Task.Delay(1000)) == task)
                 {
                     result = task.Result;
-                    con.UdpServer.Close();
+                    
 
                     switch (result.Split()[0])
                     {
                         case "CONNECTED":
-
-                            con.UdpServer = new UdpClient(new IPEndPoint(IPAddress.Any, 0));
                             con.UdpServer.Connect(address, int.Parse(result.Split()[1]));
                             for (int j = 0; j < 3; j++) 
                                 con.SendAsync("OK!");
+                            //con.UdpServer.Dispose();
                             return con;
                         case "ERROR":
                             con.Dispose();
@@ -72,14 +59,14 @@ namespace Agar.IO.Client.WinForms
                 Debug.WriteLine(res.Exception);
         }
 
-        internal async Task StartReceiving(Action<BaseCommand> onCommandReceived)
+        internal async void StartReceiving(Action<BaseCommand> onCommandReceived)
         {
             while (true)
             {
                 if (IsClosed)
                     break;
                 var task = ReceiveCommandAsync();
-                if(await Task.WhenAny(task, Task.Delay(5000)) == task)
+                if(await Task.WhenAny(task, Task.Delay(1000)) == task)
                 {
                     onCommandReceived(task.Result);
                 }
@@ -100,8 +87,9 @@ namespace Agar.IO.Client.WinForms
                 {
                     return Serializer.Deserialize<BaseCommand>(stream);
                 }
-                catch (ProtoException e)
+                catch (ProtoException)
                 {
+                    // ignore this type of exception (multiple ACK ...), wait for first command
                 }
             }
         }
@@ -129,4 +117,3 @@ namespace Agar.IO.Client.WinForms
             IsClosed = true;
         }
     }
-}
