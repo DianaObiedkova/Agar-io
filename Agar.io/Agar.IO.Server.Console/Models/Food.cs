@@ -1,9 +1,11 @@
-﻿using System;
+﻿using ProtoBuf;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Agar.IO.Server.Console.Models
 {
+    [ProtoContract]
     public class Food:Entity
     {
         public Food(float x, float y, int weight)

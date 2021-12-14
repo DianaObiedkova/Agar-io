@@ -41,7 +41,7 @@ namespace Agar.IO.Client.WinForms.Models
             LoginContr.ShowMessage(message);
         }
 
-        internal async void Start(LoginController loginController, Graphics graph, InputController input, ServerConnection con, string name)
+        internal void Start(LoginController loginController, Graphics graph, InputController input, ServerConnection con, string name)
         {
             LoginContr = loginController;
             Graph = graph;
@@ -50,16 +50,20 @@ namespace Agar.IO.Client.WinForms.Models
             PlayerName = name;
 
             Graph.StartGraph();
+            
             ServerConnection.StartReceiving(OnCommandReceived);
 
             IsRunning = true;
             Time = -1;
-            await StartLoop();
+            StartLoop();
         }
 
         internal void OnCommandReceived(BaseCommand com)
         {
-            com.Execute(this);
+            lock (this)
+            {
+                com.Execute(this);
+            }
         }
 
         private async Task StartLoop()

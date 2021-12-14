@@ -60,9 +60,9 @@ namespace Agar.IO.Server.Console
             Game.GameStateLock.ExitWriteLock();
         }
 
-        internal async Task RemovePlayer(string playerName, string message)
+        internal void RemovePlayer(string playerName, string message)
         {
-            await ConnectionController.SendToClient(playerName, new End(message));
+            ConnectionController.SendToClient(playerName, new End(message));
             Game.Players.RemoveAll(x => x.Name.Equals(playerName));
             ConnectionController.EndConnection(playerName);
         }

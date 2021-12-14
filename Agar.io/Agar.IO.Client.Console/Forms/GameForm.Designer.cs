@@ -62,7 +62,6 @@
             this.Controls.Add(this.GamePanel);
             this.Name = "GameForm";
             this.Text = "GameForm";
-            this.Load += new System.EventHandler(this.GameForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.GamePanel)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

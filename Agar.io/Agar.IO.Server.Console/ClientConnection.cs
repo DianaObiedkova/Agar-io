@@ -39,10 +39,6 @@ namespace Agar.IO.Server.Console
             await SendAsync(stream.ToArray());
         }
 
-        public string GetMessage(UdpReceiveResult res)
-        {
-            return Encoding.UTF8.GetString(res.Buffer);
-        }
 
         public void Dispose()
         {
@@ -61,7 +57,7 @@ namespace Agar.IO.Server.Console
                     var command = Serializer.Deserialize<BaseCommand>(stream);
                     return command;
                 }
-                catch (ProtoException) { }
+                catch (ProtoException e) { }
             }
         }
 

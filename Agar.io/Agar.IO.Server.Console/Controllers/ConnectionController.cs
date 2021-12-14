@@ -29,22 +29,34 @@ namespace Agar.IO.Server.Console.Controllers
                     if (Connections.Any(c => c.PlayerName == newConnection.PlayerName))
                         continue;           // already connected (... multiple connect packets from client)
 
-                    //Console.WriteLine($"Player {newConnection.PlayerName} has successfully connected!");
+                    System.Console.WriteLine($"Player {newConnection.PlayerName} has successfully connected!");
                     Connections.Add(newConnection);
                     NewPlayerAction(newConnection.PlayerName);
                 }
-                await ProcessClientAsync(newConnection);
+                ProcessClientAsync(newConnection);
             }
         }
 
-        internal async Task SendToClient(string name, BaseCommand com)
+        internal void SendToClient(string name, BaseCommand com)
         {
             using var stream = new MemoryStream();
             Serializer.Serialize(stream, com);
             stream.Seek(0, SeekOrigin.Begin);
 
-            ClientConnection con = Connections.FirstOrDefault(x => x.PlayerName.Equals(name));
-            if (!(con is null))  await con.SendAsync(stream.ToArray());
+            SendToClient(name, stream.ToArray());
+            //ClientConnection con = Connections.FirstOrDefault(x => x.PlayerName.Equals(name));
+            //if (!(con is null))  await con.SendAsync(stream.ToArray());
+        }
+
+        public void SendToClient(string name, byte[] stream)
+        {
+            ClientConnection conn;
+            lock (Connections)
+            {
+                conn = Connections.FirstOrDefault(p => p.PlayerName == name);
+            }
+            if (conn != null)
+                conn.SendAsync(stream);
         }
 
         internal void EndConnection(string playerName)
@@ -56,7 +68,7 @@ namespace Agar.IO.Server.Console.Controllers
         {
             clientConnection.IsClosed = true;
             Connections.Remove(clientConnection);
-            //Console.WriteLine($"Player stops {clientConnection.PlayerName}");
+            System.Console.WriteLine($"Player stops {clientConnection.PlayerName}");
             clientConnection.Dispose();
         }
 
@@ -102,11 +114,11 @@ namespace Agar.IO.Server.Console.Controllers
             while (!clientConnection.IsClosed)
             {
                 var receiveTask = clientConnection.ReceiveCommandAsync();
-                var task = await Task.WhenAny(receiveTask, Task.Delay(5000));
-                if (task == receiveTask)
+                //var task = await Task.WhenAny(receiveTask, Task.Delay(5000));
+                if (receiveTask == await Task.WhenAny(receiveTask, Task.Delay(5000)))
                 {
                     var command = receiveTask.Result;
-                    //Console.WriteLine("Player {0} sent: {1}", clientConnection.PlayerName, command.GetType());
+                    System.Console.WriteLine("Player {0} sent: {1}", clientConnection.PlayerName, command.GetType());
                     PlayerCommandAction(clientConnection.PlayerName, command);
                 }
                 else // timeout
@@ -115,7 +127,7 @@ namespace Agar.IO.Server.Console.Controllers
                         return;
 
                     await clientConnection.SendAsync(new End());
-                    //Console.WriteLine($"Stopped player {clientConnection.PlayerName} because of timeout!");
+                    System.Console.WriteLine($"Stopped player {clientConnection.PlayerName} because of timeout!");
                     PlayerCommandAction(clientConnection.PlayerName, new End());
                     return;
                 }

@@ -56,7 +56,7 @@ namespace Agar.IO.Client.WinForms.Controllers
         private void GameForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (game.IsRunning)
-                game.Close("");
+                game.Close("Form was closed");
         }
     }
 }

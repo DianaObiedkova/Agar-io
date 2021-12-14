@@ -10,7 +10,7 @@ namespace Agar.IO.Server.Console.Models.Commands
     {
         [ProtoMember(1)]
         public string Message { get; set; }
-        internal override async void Execute(Server server, string playerName)
+        internal override void Execute(Server server, string playerName)
         {
             server.RemovePlayer(playerName, Message);
         }

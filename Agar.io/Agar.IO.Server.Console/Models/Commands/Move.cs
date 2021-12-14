@@ -14,7 +14,7 @@ namespace Agar.IO.Server.Console.Models.Commands
         [ProtoMember(2)]
         public long Time { get; set; }
         
-        internal override async void Execute(Server server, string name)
+        internal override void Execute(Server server, string name)
         {
             bool invalid = false;
             var game = server.Game;
@@ -35,7 +35,7 @@ namespace Agar.IO.Server.Console.Models.Commands
             if (ExecuteEatingFood(player, server.Game)) invalid = true;
             if (ExecuteEatingPlayer(player, server)) invalid = true;
 
-            if (invalid) await server.ConnectionController.SendToClient(name, new Invalid("Invalid movement"));
+            if (invalid) server.ConnectionController.SendToClient(name, new Invalid("Invalid movement"));
         }
 
         private bool ExecuteEatingPlayer(Player player, Server server)

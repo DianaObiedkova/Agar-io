@@ -13,7 +13,7 @@ namespace Agar.IO.Client.WinForms
 {
     class ServerConnection:IDisposable
     {
-        private static int LoginServerPort = 11028;
+        private static readonly int LoginServerPort = 11028;
         private UdpClient UdpServer;
         private bool IsClosed { get; set; }
 
@@ -73,14 +73,14 @@ namespace Agar.IO.Client.WinForms
                 Debug.WriteLine(res.Exception);
         }
 
-        internal async void StartReceiving(Action<BaseCommand> onCommandReceived)
+        internal async Task StartReceiving(Action<BaseCommand> onCommandReceived)
         {
             while (true)
             {
                 if (IsClosed)
                     break;
                 var task = ReceiveCommandAsync();
-                if(await Task.WhenAny(task, Task.Delay(1000)) == task)
+                if(await Task.WhenAny(task, Task.Delay(5000)) == task)
                 {
                     onCommandReceived(task.Result);
                 }
@@ -101,7 +101,7 @@ namespace Agar.IO.Client.WinForms
                 {
                     return Serializer.Deserialize<BaseCommand>(stream);
                 }
-                catch (ProtoException)
+                catch (ProtoException e)
                 {
                     // ignore this type of exception (multiple ACK ...), wait for first command
                 }
